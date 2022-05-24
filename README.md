@@ -1,4 +1,4 @@
-# HWR OOP Lecture Project Template
+# CineRegister22
 
 [TODO]: # (Change README.md Headline to better fit to your project!)
 
