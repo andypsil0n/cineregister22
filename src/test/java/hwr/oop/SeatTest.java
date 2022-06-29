@@ -4,19 +4,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 public class SeatTest {
     private int row;
     private int number;
     private double price;
-    private String state;
+    private int state;
 
     @BeforeEach
     void setUp() {
         row = 4;
         number = 12;
         price = 13.5;
-        state = "free";
+        state = 1;
     }
 
     @Test
@@ -29,51 +30,77 @@ public class SeatTest {
 
     @Test
     void freeSeat_setStateToReserved_getStateReturnsReserved() {
-
+        Seat seat = new Seat(row, number, price, state);
+        seat.setStateTo("reserved");
+        String seatState = seat.getState();
+        assertThat(seatState).isEqualTo("reserved");
     }
 
 
     @Test
     void freeSeat_setStateToBooked_getStateReturnsBooked() {
-
-    }
-
-
-
-    @Test
-    void freeSeat_setToSelected_getStateReturnsFreeAndSelected() {
-
+        Seat seat = new Seat(row, number, price, state);
+        seat.setStateTo("booked");
+        String seatState = seat.getState();
+        assertThat(seatState).isEqualTo("booked");
     }
 
     @Test
-    void bookedSeat_setToSelected_getStateReturnsBookedAndSelected() {
+    void freeSeat_newFreeSeat_getSelectionStateReturnUnselected() {
+        Seat seat = new Seat(row, number, price, state);
+        String seatSelectionState = seat.getSelectionState();
+        assertThat(seatSelectionState).isEqualTo("unselected");
+    }
+
+    @Test
+    void freeSeat_setToSelected_getSelectionStateReturnSelected() {
+        Seat seat = new Seat(row, number, price, state);
+        seat.setToSelected();
+        String seatSelectionState = seat.getSelectionState();
+        assertThat(seatSelectionState).isEqualTo("selected");
+    }
+
+    @Test
+    void placeholderSeat_setState_throwsException() throws Exception {
+        Seat seat = new Seat(row, number, price, 0);
+
+        //when
+        Throwable thrown = catchThrowable(() -> seat.setStateTo("reserved"));
+
+        //then
+        assertThat(thrown).hasMessageContaining("Cannot change the state of a placeholder seat");
 
     }
 
     @Test
-    void reservedSeat_setToSelected_getStateReturnsReservedAndSelected() {
+    void placeholderSeat_setToSelected_throwsException() {
+        Seat seat = new Seat(row, number, price, 0);
 
-    }
+        //when
+        Throwable thrown = catchThrowable(() -> seat.setToSelected());
 
-
-
-    @Test
-    void placeholderSeat_SetState_throwsException() {
-
+        //then
+        assertThat(thrown).hasMessageContaining("Cannot change the selection-state of a placeholder seat");
     }
 
     @Test
     void seat_getRow_returnsRow() {
-
+        Seat seat = new Seat(row, number, price, 0);
+        int seatRow = seat.getRow();
+        assertThat(seatRow).isEqualTo(row);
     }
 
     @Test
     void seat_getNumber_returnsNumber() {
-
+        Seat seat = new Seat(row, number, price, 0);
+        int seatNumber = seat.getNumber();
+        assertThat(seatNumber).isEqualTo(number);
     }
 
     @Test
     void seat_getPrice_returnsMoviePrice() {
-
+        Seat seat = new Seat(row, number, price, 0);
+        double seatPrice = seat.getPrice();
+        assertThat(seatPrice).isEqualTo(price);
     }
 }
