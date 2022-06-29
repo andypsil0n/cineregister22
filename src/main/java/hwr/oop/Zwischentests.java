@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Zwischentests {
     public static void main(String[] args) throws FileNotFoundException {
 
-        File getMovies = new File("movielist.txt");
+        File getMovies = new File("src\\movielist.txt");
         Scanner sc = new Scanner(getMovies);
         sc.useDelimiter("#");
         while (sc.hasNext())
