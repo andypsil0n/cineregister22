@@ -37,10 +37,6 @@ public class Seat {
 
     }
 
-    public void setStateToBooked() {
-        state = 3;
-    }
-
     public String getSelectionState() {
         if(selectionState == 1){
             return "selected";
@@ -54,6 +50,8 @@ public class Seat {
         }
         selectionState = 1;
     }
+
+    //unselect hinzufügen!!
 
     public int getRow() {
         return row;
