@@ -103,4 +103,36 @@ public class SeatTest {
         double seatPrice = seat.getPrice();
         assertThat(seatPrice).isEqualTo(price);
     }
+
+    @Test
+    void seat_getStateAsChar_state1ReturnsX() {
+        Seat seat = new Seat(row, number, price, 1);
+        char stateChar = seat.getStateAsChar();
+
+        assertThat(stateChar).isEqualTo('x');
+    }
+
+    @Test
+    void seat_getStateAsChar_state2ReturnsR() {
+        Seat seat = new Seat(row, number, price, 2);
+        char stateChar = seat.getStateAsChar();
+
+        assertThat(stateChar).isEqualTo('r');
+    }
+
+    @Test
+    void seat_getStateAsChar_state3ReturnsHashtag() {
+        Seat seat = new Seat(row, number, price, 3);
+        char stateChar = seat.getStateAsChar();
+
+        assertThat(stateChar).isEqualTo('#');
+    }
+
+    @Test
+    void seat_getStateAsChar_state0ReturnsSpace() {
+        Seat seat = new Seat(row, number, price, 0);
+        char stateChar = seat.getStateAsChar();
+
+        assertThat(stateChar).isEqualTo(' ');
+    }
 }

@@ -66,4 +66,22 @@ public class Seat {
     public double getPrice() {
         return price;
     }
+
+    public char getStateAsChar() {
+        char stateChar;
+
+        if (state == 0) {
+            stateChar = ' ';
+        } else if (state == 1) {
+            stateChar = 'x';
+        } else if (state == 2) {
+            stateChar = 'r';
+        } else if (state == 3) {
+            stateChar = '#';
+        } else {
+            stateChar = ' ';
+        }
+
+        return stateChar;
+    }
 }

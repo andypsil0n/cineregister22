@@ -121,4 +121,8 @@ public class Movie {
     public Hall getHallAt(String day, String time) {
         return null;
     }
+
+    public Show getShowAt(String day, String time) {
+        return null;
+    }
 }

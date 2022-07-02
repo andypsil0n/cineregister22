@@ -39,20 +39,12 @@ public class MovieTest {
         assertThat(movieTimes).isEqualTo(movieTimesAsString);
     }
 
-   /* @Test
-    void movie_getHallAt_returnsWantedHallWithCorrectPrice() {
-        Movie movie = new Movie(name, times);
-        Hall movieHall = movie.getHallAt("Mo", "17:00");
-
-        Double wantedPrice = 7.00;
-        Double price = movieHall.getPrice();
-
-        assertThat(price).isEqualTo(wantedPrice);
-    }*/
-
     @Test
-    void movie_getHallAt_returnsWantedHall() {
+    void movie_getShowAt_returnsWantedShow() {
+        Movie movie = new Movie(name, times);
+        Show show = movie.getShowAt("Mo", "17:00");
 
+        //noch nicht fertig!
     }
 
 }
