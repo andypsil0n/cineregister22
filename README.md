@@ -18,7 +18,11 @@ This repository contains a student project created for an ongoing lecture on obj
 
 | Number | Feature | Tests |
 |--------|---------|-------|
-| 1      | /       | /     |
+| 1      | Movie   | /     |
+| 2      | Show    | /     |
+| 3      | Hall    | /     |
+| 4      | Seat    | /     |
+| 5      | Receipt | /     |
 
 
 ## Additional Dependencies
