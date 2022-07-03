@@ -6,11 +6,13 @@ public class Movie {
     private final String name;
     private final ArrayList<String> times;
     private ArrayList<ArrayList<String>> sortedTimes = new ArrayList<ArrayList<String>>();
+    private ArrayList<ArrayList<Show>> shows = new ArrayList<ArrayList<Show>>();
 
     public Movie(String name, ArrayList times) {
         this.name = name;
         this.times = times;
         sortTimes();
+        buildShows();
     }
 
     private void sortTimes() {
@@ -117,7 +119,44 @@ public class Movie {
         return stringTimes;
     }
 
-    public Show getShowAt(String day, String time) {
+
+    private void buildShows() {
+
+    }
+
+    public Show getShowAt(String dayString, String timeString) {
+        int day;
+        int time;
+
+        day = checkWhatDay(dayString);
+        time = checkWhatTime(timeString);
+
+        Show show = shows.get(day).get(time);
         return null;
     }
+
+    private int checkWhatDay(String dayString) {
+        int day = 0;
+        if (dayString.equals("Mo")) {
+            day = 0;
+        } else if (dayString.equals("Di")) {
+            day = 1;
+        } else if (dayString.equals("Mi")) {
+            day = 2;
+        } else if (dayString.equals("Do")) {
+            day = 3;
+        } else if (dayString.equals("Fr")) {
+            day = 4;
+        } else if (dayString.equals("Sa")) {
+            day = 5;
+        } else if (dayString.equals("So")) {
+            day = 6;
+        }
+        return day;
+    }
+
+    private int checkWhatTime(String timeString) {
+        return 0;
+    }
+
 }

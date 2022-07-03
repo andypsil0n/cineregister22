@@ -43,8 +43,9 @@ public class MovieTest {
     void movie_getShowAt_returnsWantedShow() {
         Movie movie = new Movie(name, times);
         Show show = movie.getShowAt("Mo", "17:00");
+        String newTime = show.getTime();
 
-        //noch nicht fertig!
+        assertThat(newTime).isEqualTo("Mo/17:00");
     }
 
 }
