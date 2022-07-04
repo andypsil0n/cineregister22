@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 public class MovieTest {
     String name;
@@ -39,12 +40,89 @@ public class MovieTest {
     }
 
     @Test
-    void movie_getShowAt_returnsWantedShow() {
+    void movie_getShowAt_moReturnsWantedShowOnMonday() {
         Movie movie = new Movie(name, times);
         Show show = movie.getShowAt("Mo", "20:00");
         String newTime = show.getCompleteTime();
 
         assertThat(newTime).isEqualTo("Mo/20:00");
+    }
+    @Test
+    void movie_getShowAt_diReturnsWantedShowOnTuesday() {
+        Movie movie = new Movie(name, times);
+        Show show = movie.getShowAt("Di", "17:00");
+        String newTime = show.getCompleteTime();
+
+        assertThat(newTime).isEqualTo("Di/17:00");
+    }
+
+    @Test
+    void movie_getShowAt_miReturnsWantedShowOnWednesday() {
+        Movie movie = new Movie(name, times);
+        Show show = movie.getShowAt("Mi", "14:00");
+        String newTime = show.getCompleteTime();
+
+        assertThat(newTime).isEqualTo("Mi/14:00");
+    }
+
+    @Test
+    void movie_getShowAt_doReturnsWantedShowOnThursday() {
+        Movie movie = new Movie(name, times);
+        Show show = movie.getShowAt("Do", "14:00");
+        String newTime = show.getCompleteTime();
+
+        assertThat(newTime).isEqualTo("Do/14:00");
+    }
+
+    @Test
+    void movie_getShowAt_frReturnsWantedShowOnFriday() {
+        Movie movie = new Movie(name, times);
+        Show show = movie.getShowAt("Fr", "17:00");
+        String newTime = show.getCompleteTime();
+
+        assertThat(newTime).isEqualTo("Fr/17:00");
+    }
+
+    @Test
+    void movie_getShowAt_saReturnsWantedShowOnSaturday() {
+        Movie movie = new Movie(name, times);
+        Show show = movie.getShowAt("Sa", "14:00");
+        String newTime = show.getCompleteTime();
+
+        assertThat(newTime).isEqualTo("Sa/14:00");
+    }
+
+    @Test
+    void movie_getShowAt_soReturnsWantedShowOnSunday() {
+        Movie movie = new Movie(name, times);
+        Show show = movie.getShowAt("So", "15:00");
+        String newTime = show.getCompleteTime();
+
+        assertThat(newTime).isEqualTo("So/15:00");
+    }
+
+    @Test
+    void movie_getShowAt_wrongShowDayThrowsException() {
+        Movie movie = new Movie(name, times);
+        //when
+        Throwable thrown = catchThrowable(() -> movie.getShowAt("De", "20:00"));
+
+        //then
+        assertThat(thrown).hasMessageContaining("The entered day does not exist");
+
+
+    }
+
+    @Test
+    void movie_getShowAt_wrongShowTimeThrowsException() {
+        Movie movie = new Movie(name, times);
+        //when
+        Throwable thrown = catchThrowable(() -> movie.getShowAt("Mo", "25:00"));
+
+        //then
+        assertThat(thrown).hasMessageContaining("No show exists at the entered time");
+
+
     }
 
 }

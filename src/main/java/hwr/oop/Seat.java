@@ -7,12 +7,26 @@ public class Seat {
     private double price;
     private int state;
 
-    public Seat(int row, int number, double price, int state) {
+    public Seat(int row, int number, double price, char stateChar) {
         this.row = row;
         this.number = number;
         this.price = price;
-        this.state = state;
+        this.state = convertStateToInt(stateChar);
         this.selectionState = 0;
+    }
+
+    private int convertStateToInt(char stateChar) {
+        int state = 0;
+        if (stateChar == ' ') {
+            state = 0;
+        } else if (stateChar == 'x') {
+            state = 1;
+        } else if (stateChar == 'r') {
+            state = 2;
+        } else if (stateChar == '#') {
+            state = 3;
+        }
+        return state;
     }
 
     public String getState() {
@@ -67,6 +81,7 @@ public class Seat {
 
     public char getStateAsChar() {
         char stateChar;
+        stateChar = ' ';
 
         if (state == 0) {
             stateChar = ' ';
@@ -76,8 +91,6 @@ public class Seat {
             stateChar = 'r';
         } else if (state == 3) {
             stateChar = '#';
-        } else {
-            stateChar = ' ';
         }
 
         return stateChar;

@@ -48,4 +48,5 @@ public class HallTest {
 
         assertThat(newHallAsString).isEqualTo(hallAsString);
     }
+
 }

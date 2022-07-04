@@ -32,25 +32,15 @@ public class Hall {
         for (int row = 0; row < maxRows; row++) {
             hall.add(new ArrayList<Seat>());
             for (int number = 0; number < maxNumbers; number++) {
-                char stringSeat = hallFileScanner.next().charAt(0);
-                int seatState = 0;
-                if (stringSeat == ' ') {
-                    seatState = 0;
-                } else if (stringSeat == 'x') {
-                    seatState = 1;
-                } else if (stringSeat == 'r') {
-                    seatState = 2;
-                } else if (stringSeat == '#') {
-                    seatState = 3;
-                } else {
-                    seatState = 0;
-                }
-                hall.get(row).add(new Seat(row, number, price, seatState));
+                char steatStateChar = hallFileScanner.next().charAt(0);
+                //----
+                hall.get(row).add(new Seat(row, number, price, steatStateChar));
             }
             if (row < maxRows-1) {
                 hallFileScanner.nextLine();
             }
         }
+
     }
 
     public Seat getSeatAt(int row, int number) {

@@ -10,14 +10,14 @@ public class SeatTest {
     private int row;
     private int number;
     private double price;
-    private int state;
+    private char state;
 
     @BeforeEach
     void setUp() {
         row = 4;
         number = 12;
         price = 13.5;
-        state = 1;
+        state = 'x'; //state: "free"
     }
 
     @Test
@@ -62,7 +62,7 @@ public class SeatTest {
 
     @Test
     void placeholderSeat_setState_throwsException() throws Exception {
-        Seat seat = new Seat(row, number, price, 0);
+        Seat seat = new Seat(row, number, price, ' ');
 
         //when
         Throwable thrown = catchThrowable(() -> seat.setStateTo("reserved"));
@@ -74,7 +74,7 @@ public class SeatTest {
 
     @Test
     void placeholderSeat_setToSelected_throwsException() {
-        Seat seat = new Seat(row, number, price, 0);
+        Seat seat = new Seat(row, number, price, ' ');
 
         //when
         Throwable thrown = catchThrowable(() -> seat.setToSelected());
@@ -85,28 +85,28 @@ public class SeatTest {
 
     @Test
     void seat_getRow_returnsRow() {
-        Seat seat = new Seat(row, number, price, 0);
+        Seat seat = new Seat(row, number, price, ' ');
         int seatRow = seat.getRow();
         assertThat(seatRow).isEqualTo(row);
     }
 
     @Test
     void seat_getNumber_returnsNumber() {
-        Seat seat = new Seat(row, number, price, 0);
+        Seat seat = new Seat(row, number, price, ' ');
         int seatNumber = seat.getNumber();
         assertThat(seatNumber).isEqualTo(number);
     }
 
     @Test
     void seat_getPrice_returnsMoviePrice() {
-        Seat seat = new Seat(row, number, price, 0);
+        Seat seat = new Seat(row, number, price, ' ');
         double seatPrice = seat.getPrice();
         assertThat(seatPrice).isEqualTo(price);
     }
 
     @Test
     void seat_getStateAsChar_state1ReturnsX() {
-        Seat seat = new Seat(row, number, price, 1);
+        Seat seat = new Seat(row, number, price, 'x');
         char stateChar = seat.getStateAsChar();
 
         assertThat(stateChar).isEqualTo('x');
@@ -114,7 +114,7 @@ public class SeatTest {
 
     @Test
     void seat_getStateAsChar_state2ReturnsR() {
-        Seat seat = new Seat(row, number, price, 2);
+        Seat seat = new Seat(row, number, price, 'r');
         char stateChar = seat.getStateAsChar();
 
         assertThat(stateChar).isEqualTo('r');
@@ -122,7 +122,7 @@ public class SeatTest {
 
     @Test
     void seat_getStateAsChar_state3ReturnsHashtag() {
-        Seat seat = new Seat(row, number, price, 3);
+        Seat seat = new Seat(row, number, price, '#');
         char stateChar = seat.getStateAsChar();
 
         assertThat(stateChar).isEqualTo('#');
@@ -130,7 +130,7 @@ public class SeatTest {
 
     @Test
     void seat_getStateAsChar_state0ReturnsSpace() {
-        Seat seat = new Seat(row, number, price, 0);
+        Seat seat = new Seat(row, number, price, ' ');
         char stateChar = seat.getStateAsChar();
 
         assertThat(stateChar).isEqualTo(' ');

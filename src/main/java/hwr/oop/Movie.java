@@ -76,15 +76,48 @@ public class Movie {
 
 
     public Show getShowAt(String dayString, String timeString) {
+        checkIfCorrectDay(dayString);
+
         int day;
         int time;
 
         day = checkWhatDay(dayString);
+
+        checkIfCorrectTime(day, timeString);
         time = checkWhatTime(day, timeString);
 
         Show show = allMovieShows.get(day).get(time);
         return show;
 
+    }
+
+    private void checkIfCorrectDay(String dayString) {
+        boolean correctInput = false;
+        String[] correctDays = {"Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"};
+        for (int i = 0; i < correctDays.length; i++) {
+            if (correctDays[i].equals(dayString)) {
+                correctInput = true;
+            }
+        }
+
+        if (correctInput == false) {
+            throw new RuntimeException("The entered day does not exist");
+        }
+    }
+
+    private void checkIfCorrectTime(int day, String timeString) {
+        boolean correctInput = false;
+        int numberOfShows = allMovieShows.get(day).size();
+        for (int showNumber = 0; showNumber < numberOfShows; showNumber++) {
+            Show show = allMovieShows.get(day).get(showNumber);
+            if (show.getDayTime().equals(timeString)) {
+                correctInput = true;
+            }
+        }
+
+        if (correctInput == false) {
+            throw new RuntimeException("No show exists at the entered time");
+        }
     }
 
     private int checkWhatDay(String dayString) {
