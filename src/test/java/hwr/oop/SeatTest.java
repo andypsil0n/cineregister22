@@ -45,13 +45,16 @@ public class SeatTest {
         assertThat(seatState).isEqualTo("booked");
     }
 
+    /*
     @Test
     void freeSeat_newFreeSeat_getSelectionStateReturnUnselected() {
         Seat seat = new Seat(row, number, price, state);
         String seatSelectionState = seat.getSelectionState();
         assertThat(seatSelectionState).isEqualTo("unselected");
     }
+     */
 
+    /*
     @Test
     void freeSeat_setToSelected_getSelectionStateReturnSelected() {
         Seat seat = new Seat(row, number, price, state);
@@ -59,6 +62,7 @@ public class SeatTest {
         String seatSelectionState = seat.getSelectionState();
         assertThat(seatSelectionState).isEqualTo("selected");
     }
+     */
 
     @Test
     void placeholderSeat_setState_throwsException() throws Exception {
@@ -72,6 +76,7 @@ public class SeatTest {
 
     }
 
+    /*
     @Test
     void placeholderSeat_setToSelected_throwsException() {
         Seat seat = new Seat(row, number, price, ' ');
@@ -82,6 +87,7 @@ public class SeatTest {
         //then
         assertThat(thrown).hasMessageContaining("Cannot change the selection-state of a placeholder seat");
     }
+     */
 
     @Test
     void seat_getRow_returnsRow() {

@@ -1,7 +1,7 @@
 package hwr.oop;
 
 public class Seat {
-    private int selectionState;
+    //private int selectionState;
     private int row;
     private int number;
     private double price;
@@ -12,7 +12,7 @@ public class Seat {
         this.number = number;
         this.price = price;
         this.state = convertStateToInt(stateChar);
-        this.selectionState = 0;
+        //this.selectionState = 0;
     }
 
     private int convertStateToInt(char stateChar) {
@@ -51,6 +51,7 @@ public class Seat {
 
     }
 
+    /*
     public String getSelectionState() {
         if(selectionState == 1){
             return "selected";
@@ -64,8 +65,9 @@ public class Seat {
         }
         selectionState = 1;
     }
+     */
 
-    //unselect hinzufügen!!
+    //unselect hinzufügen?
 
     public int getRow() {
         return row;

@@ -16,13 +16,17 @@ This repository contains a student project created for an ongoing lecture on obj
 
 [TODO]: # (For each feature implemented, add a row to the table!)
 
-| Number | Feature | Tests |
-|--------|---------|-------|
-| 1      | Movie   | /     |
-| 2      | Show    | /     |
-| 3      | Hall    | /     |
-| 4      | Seat    | /     |
-| 5      | Receipt | /     |
+| Number | Feature         | Tests |
+|--------|-----------------|-------|
+| 1      | MovieCollection | /     |
+| 2      | MovieBuilder    | /     |
+| 3      | Movie           | /     |
+| 4      | ShowBuilder     | /     |
+| 5      | Show            | /     |
+| 6      | Hall            | /     |
+| 7      | Seat            | /     |
+| 8      | Receipt         | /     |
+| 9      | Main            | /     |
 
 
 ## Additional Dependencies
