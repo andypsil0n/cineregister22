@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 public class MovieTest {
     String name;
@@ -15,13 +14,13 @@ public class MovieTest {
     @BeforeEach
     void setUp() {
         name = "Star Wars VI";
-        times = new ArrayList<>(Arrays.asList ( "Mo/17:00/Saal 1/7.00","Mo/20:00/Saal 2/7.00","Di/17:00/Saal 1/8.00","Mi/14:00/Saal 2/7.50",
-                "Do/14:00/Saal 1/7.00","Fr/17:00/Saal 3/7.00","Sa/14:00/Saal 1/7.00",
-                "So/15:00/Saal 1/7.00"));
+        times = new ArrayList<>(Arrays.asList ( "Mo/17:00/hall1/7.00","Mo/20:00/hall1/7.00","Di/17:00/hall1/8.00",
+                "Mi/14:00/hall1/7.50", "Do/14:00/hall1/7.00","Fr/17:00/hall1/7.00","Sa/14:00/hall1/7.00",
+                "So/15:00/hall1/7.00"));
 
         movieTimesAsString ="Mo     Di     Mi     Do     Fr     Sa     So\n" +
                             "17:00  17:00  14:00  14:00  17:00  14:00  15:00\n" +
-                            "20:00                                          \n\n";
+                            "20:00  ";
     }
 
     @Test
@@ -35,17 +34,17 @@ public class MovieTest {
     @Test
     void movie_getTimes_returnsTimesAsString() {
         Movie movie = new Movie(name, times);
-        String movieTimes = movie.getTimes();
+        String movieTimes = movie.getTimesAsString();
         assertThat(movieTimes).isEqualTo(movieTimesAsString);
     }
 
     @Test
     void movie_getShowAt_returnsWantedShow() {
         Movie movie = new Movie(name, times);
-        Show show = movie.getShowAt("Mo", "17:00");
-        String newTime = show.getTime();
+        Show show = movie.getShowAt("Mo", "20:00");
+        String newTime = show.getCompleteTime();
 
-        assertThat(newTime).isEqualTo("Mo/17:00");
+        assertThat(newTime).isEqualTo("Mo/20:00");
     }
 
 }

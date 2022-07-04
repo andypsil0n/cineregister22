@@ -5,30 +5,18 @@ import java.util.*;
 public class Movie {
     private final String name;
     private final ArrayList<String> times;
-    private ArrayList<ArrayList<String>> sortedTimes = new ArrayList<ArrayList<String>>();
-    private ArrayList<ArrayList<Show>> shows = new ArrayList<ArrayList<Show>>();
+    private ArrayList<ArrayList<Show>> allMovieShows = new ArrayList<ArrayList<Show>>();
 
     public Movie(String name, ArrayList times) {
         this.name = name;
         this.times = times;
-        sortTimes();
+        //sortTimes(); -- raus
         buildShows();
     }
 
-    private void sortTimes() {
-        String show;
-        String[] s;
-
-        for (int x = 0; x < times.size(); x++) {
-            show = times.get(x);
-            s = show.split("/");
-
-            sortedTimes.add(x, new ArrayList<String>());
-            for (int y = 0; y < 4; y++) {
-                sortedTimes.get(x).add(s[y]);
-            }
-
-        }
+    private void buildShows() {
+        ShowBuilder showBuilder = new ShowBuilder(times);
+        allMovieShows.addAll(showBuilder.buildShows());
     }
 
     public String getName() {
@@ -36,103 +24,67 @@ public class Movie {
     }
 
 
-    private int getMaxYSize() {
-        int maxYSize = 1;
-        String currentMaxHolder = "";
-        for (int x = 0; x < sortedTimes.size(); x++) {
-            if (x != 0 && sortedTimes.get(x-1).get(0).equals(sortedTimes.get(x).get(0)) &!
-                    sortedTimes.get(x).get(0).equals(currentMaxHolder)) {
-                maxYSize += 1;
-                currentMaxHolder = sortedTimes.get(x).get(0);
-            } else if (currentMaxHolder.equals(sortedTimes.get(x).get(0))) {
-                maxYSize += 1;
-            }
-        }
-
-        return maxYSize;
+    public String getTimesAsString() {
+        String daysAsString = getDaysAsString();
+        String dayTimesAsString = getDayTimesAsString();
+        return daysAsString + dayTimesAsString;
     }
 
-    private String getClockTimesAsString(int maxYSize, ArrayList<ArrayList<String>> tableRest) {
-        String stringClockTimes = "";
+    private String getDaysAsString() {
+        String daysAsString = "Mo     Di     Mi     Do     Fr     Sa     So\n";
+        return daysAsString;
+    }
 
-        for (int i = 1; i <= maxYSize; i++) {
-            String line = "";
+    private String getDayTimesAsString() {
+        String dayTimesAsString = "";
+        String line = "";
 
-
-            for (int x = 0; x < times.size(); x++) {
-                if (x != 0 && tableRest.get(x - 1).get(0).equals(tableRest.get(x).get(0))) {
-                    if (tableRest.get(x - 1).get(1).equals("")) {
-                        if (x == tableRest.size() - 1) {
-                            line = line + tableRest.get(x).get(1) + "\n";
-                            tableRest.get(x).set(1, "     \n");
-                        } else {
-                            line = line + tableRest.get(x).get(1) + "  ";
-                            tableRest.get(x).set(1, "     ");
-                        }
-                    }
-                    tableRest.get(x - 1).set(1, "");
-                } else {
-                    if (x == tableRest.size() - 1) {
-                        line = line + tableRest.get(x).get(1) + "\n";
-                        tableRest.get(x).set(1, "     \n");
-                    } else if (tableRest.get(x).get(1).equals("")) {
-                        line = line;
+        int maxShowsPerDay = getMaxShowsPerDay();
+        for (int showLine = 0; showLine < maxShowsPerDay; showLine++) {
+            for (int day = 0; day < 7; day++) {
+                if ( showLine >= 0 && showLine <= (allMovieShows.get(day).size() - 1)) {
+                    if (day == 6) {
+                        Show show = allMovieShows.get(day).get(showLine);
+                        line = line + show.getDayTime() + "\n";
                     } else {
-                        line = line + tableRest.get(x).get(1) + "  ";
-                        tableRest.get(x).set(1, "     ");
+                        Show show = allMovieShows.get(day).get(showLine);
+                        line = line + show.getDayTime() + "  ";
                     }
                 }
             }
-            stringClockTimes = stringClockTimes + line;
-
+            dayTimesAsString = dayTimesAsString + line;
+            line = "";
         }
-        return stringClockTimes;
+
+        return dayTimesAsString;
     }
 
-
-    public String getTimes() {
-        String stringDays = "";
-        for (int x = 0; x < times.size(); x++) {
-            if (x == 0) {
-                stringDays = stringDays + sortedTimes.get(x).get(0) + "     ";
-            } else if (sortedTimes.get(x-1).get(0).equals(sortedTimes.get(x).get(0))) {
-                stringDays = stringDays;
-            } else if (x == times.size()-1) {
-                stringDays = stringDays + sortedTimes.get(x).get(0) + "\n";
+    private int getMaxShowsPerDay() {
+        int maxShowsPerDay = 0;
+        for (int day = 0; day < 7; day++) {
+            if (day == 0) {
+                maxShowsPerDay = allMovieShows.get(day).size();
             } else {
-                stringDays = stringDays + sortedTimes.get(x).get(0) + "     ";
+                if (allMovieShows.get(day).size() > maxShowsPerDay) {
+                    maxShowsPerDay = allMovieShows.get(day).size();
+                }
             }
         }
-
-        int maxYSize = getMaxYSize();
-
-        ArrayList<ArrayList<String>> tableRest = new ArrayList<ArrayList<String>>();
-        for (int x = 0; x < times.size(); x++) {
-            tableRest.add(new ArrayList<String>());
-            for (int y = 0; y < 2; y++) {
-                tableRest.get(x).add(this.sortedTimes.get(x).get(y));
-            }
-        }
-
-        String stringTimes = stringDays + getClockTimesAsString(maxYSize, tableRest);
-
-        return stringTimes;
+        return maxShowsPerDay;
     }
 
 
-    private void buildShows() {
-
-    }
 
     public Show getShowAt(String dayString, String timeString) {
         int day;
         int time;
 
         day = checkWhatDay(dayString);
-        time = checkWhatTime(timeString);
+        time = checkWhatTime(day, timeString);
 
-        Show show = shows.get(day).get(time);
-        return null;
+        Show show = allMovieShows.get(day).get(time);
+        return show;
+
     }
 
     private int checkWhatDay(String dayString) {
@@ -155,8 +107,21 @@ public class Movie {
         return day;
     }
 
-    private int checkWhatTime(String timeString) {
-        return 0;
+    private int checkWhatTime(int day, String timeString) {
+        boolean correctSelectedTime = false;
+        int wantedTime = 0;
+        int showNumber = 0;
+
+        while (correctSelectedTime == false) {
+            Show selectedShow = allMovieShows.get(day).get(showNumber);
+            String selectedTimeAsString = selectedShow.getDayTime();
+            if (selectedTimeAsString.equals(timeString)) {
+                wantedTime = showNumber;
+                correctSelectedTime = true;
+            }
+            showNumber++;
+        }
+        return wantedTime;
     }
 
 }

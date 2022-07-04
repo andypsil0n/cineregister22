@@ -5,9 +5,11 @@ public class Show {
     private String time;
     private Hall hall;
 
-    public Show(String day, String time, String hallName, double price) {
-        this.day = day;
-        this.time = time;
+    public Show(String[] splittedShow) {
+        this.day = splittedShow[0];
+        this.time = splittedShow[1];
+        String hallName = splittedShow[2];
+        double price = Double.parseDouble(splittedShow[3]);
         hall = new Hall(hallName, price);
     }
 
@@ -27,9 +29,13 @@ public class Show {
         return seat.getPrice();
     }
 
-    public String getTime() {
+    public String getCompleteTime() {
         String dayAndTime = "";
         dayAndTime = day + "/" + time;
+        return dayAndTime;
+    }
+
+    public String getDayTime() {
         return time;
     }
 }

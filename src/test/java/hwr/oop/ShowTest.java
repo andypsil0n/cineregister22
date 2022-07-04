@@ -10,7 +10,9 @@ public class ShowTest {
     private String day;
     private String time;
     private String hallName;
+    private String priceString;
     private double price;
+    String[] splittedShow;
     private Hall hall;
 
     @BeforeEach
@@ -20,22 +22,37 @@ public class ShowTest {
         time = "20:00";
         hallName = "hall1";
         price = 7.00;
-
+        priceString = String.valueOf(price);
+        splittedShow = new String[]{day, time, hallName, priceString};
     }
 
     @Test
     void show_getHall_returnsHall() {
-        Show show = new Show(day, time, hallName, price);
+        Show show = new Show(splittedShow);
         Hall newHall = show.getHall();
         Seat seat = newHall.getSeatAt(5, 5);
 
         assertThat(seat.getPrice()).isEqualTo(price);
 
     }
+
+    @Test
+    void show_getCompleteTime_returnsDayAndTimeAsString() {
+        Show show = new Show(splittedShow);
+        String completeTime = show.getCompleteTime();
+        assertThat(completeTime).isEqualTo(day + "/" + time);
+    }
+
+    @Test
+    void show_getDayTime_returnsDayTimeAsString() {
+        Show show = new Show(splittedShow);
+        String dayTime = show.getDayTime();
+        assertThat(dayTime).isEqualTo(time);
+    }
     
     @Test
     void show_bookSeats_booksAsManySeatsAsWanted() {
-        Show show = new Show(day, time, hallName, price);
+        Show show = new Show(splittedShow);
         int row = 4;
         int number = 5;
         double totalPrice = 0.00;
@@ -59,7 +76,7 @@ public class ShowTest {
 
     @Test
     void seat_reserveSeat_reservesAsManySeatsAsWanted() {
-        Show show = new Show(day, time, hallName, price);
+        Show show = new Show(splittedShow);
         int row = 4;
         int number = 5;
         double totalPrice = 0.00;
