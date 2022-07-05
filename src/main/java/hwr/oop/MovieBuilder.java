@@ -40,7 +40,6 @@ public class MovieBuilder {
     private int getNumberOfMovies() throws FileNotFoundException {
         Scanner movieScanner = new Scanner(movielistSource);
         int numberOfMovies = 0;
-        movieScanner.useDelimiter(";");
         while (movieScanner.hasNextLine()) {
             numberOfMovies++;
             movieScanner.nextLine();
