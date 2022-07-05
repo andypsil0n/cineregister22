@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>hwr.oop.projects</groupId>
     <!-- TODO Change name and description according to your project -->
-    <artifactId>project</artifactId>
+    <artifactId>CineRegister22</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <!-- TODO Change name and description according to your project -->
-    <name>project</name>
+    <name>CineRegister22</name>
     <description>project-description</description>
     <properties>
         <!-- java -->
