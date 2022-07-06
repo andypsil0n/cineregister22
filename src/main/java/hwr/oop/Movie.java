@@ -43,12 +43,19 @@ public class Movie {
         for (int showLine = 0; showLine < maxShowsPerDay; showLine++) {
             for (int day = 0; day < 7; day++) {
                 if ( showLine >= 0 && showLine <= (allMovieShows.get(day).size() - 1)) {
-                    if (day == 6) {
+                    if (day >= 6) {
                         Show show = allMovieShows.get(day).get(showLine);
                         line = line + show.getDayTime() + "\n";
                     } else {
                         Show show = allMovieShows.get(day).get(showLine);
                         line = line + show.getDayTime() + "  ";
+                    }
+                } else if (showLine > allMovieShows.get(day).size() - 1){
+                    if (day >= 6) {
+                        ;
+                        line = line + "     \n";
+                    } else {
+                        line = line + "       ";
                     }
                 }
             }

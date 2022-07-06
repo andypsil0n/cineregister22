@@ -21,7 +21,7 @@ public class MovieTest {
 
         movieTimesAsString ="Mo     Di     Mi     Do     Fr     Sa     So\n" +
                             "17:00  17:00  14:00  14:00  17:00  14:00  15:00\n" +
-                            "20:00  ";
+                            "20:00                                          \n";
     }
 
     @Test

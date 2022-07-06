@@ -33,4 +33,16 @@ public class MovieCollection {
 
         return movies.get(wantedMovieNumber);
     }
+
+    public String getMoviesAsString() {
+        String moviesAsString = "";
+
+        for (int movieCount = 0; movieCount < movies.size(); movieCount++) {
+            Movie movie = movies.get(movieCount);
+            moviesAsString = moviesAsString + movie.getName() + "\n";
+            moviesAsString = moviesAsString + movie.getTimesAsString() + "\n";
+        }
+
+        return moviesAsString;
+    }
 }

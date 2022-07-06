@@ -49,4 +49,12 @@ public class HallTest {
         assertThat(newHallAsString).isEqualTo(hallAsString);
     }
 
+    @Test
+    void hall_countFreeSeats_returnsNumberOfFreeSeats() {
+        Hall hall = new Hall(hallName, price);
+        int freeSeats = hall.countFreeSeats();
+
+        assertThat(freeSeats).isEqualTo(86);
+    }
+
 }

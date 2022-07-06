@@ -62,4 +62,18 @@ public class Hall {
 
         return hallAsString;
     }
+
+    public int countFreeSeats() {
+        int freeSeats = 0;
+
+        for (int row = 0; row < maxRows; row++) {
+            for (int number = 0; number < maxNumbers; number++) {
+                Seat seat = hall.get(row).get(number);
+                if (seat.getStateAsChar() == 'x') {
+                    freeSeats += 1;
+                }
+            }
+        }
+        return freeSeats;
+    }
 }

@@ -1,7 +1,8 @@
 package hwr.oop;
 
+import java.util.Locale;
+
 public class Seat {
-    //private int selectionState;
     private int row;
     private int number;
     private double price;
@@ -11,12 +12,11 @@ public class Seat {
         this.row = row;
         this.number = number;
         this.price = price;
-        this.state = convertStateToInt(stateChar);
-        //this.selectionState = 0;
+        convertStateToInt(stateChar);
     }
 
-    private int convertStateToInt(char stateChar) {
-        int state = 0;
+    private void convertStateToInt(char stateChar) {
+        state = 0;
         if (stateChar == ' ') {
             state = 0;
         } else if (stateChar == 'x') {
@@ -26,7 +26,6 @@ public class Seat {
         } else if (stateChar == '#') {
             state = 3;
         }
-        return state;
     }
 
     public String getState() {
@@ -40,34 +39,19 @@ public class Seat {
     }
 
     public void setStateTo(String newState) {
+        newState = newState.toLowerCase();
         if(state == 0) {
             throw new RuntimeException("Cannot change the state of a placeholder seat");
         }
-        if(newState == "reserved") {
+        if(newState.equals("r")) {
             state = 2;
-        } else if(newState == "booked") {
+        } else if(newState.equals("b")) {
             state = 3;
+        } else  {
+            throw new RuntimeException("This is a wrong input for a state");
         }
 
     }
-
-    /*
-    public String getSelectionState() {
-        if(selectionState == 1){
-            return "selected";
-        }
-        return "unselected";
-    }
-
-    public void setToSelected() {
-        if(state == 0) {
-            throw new RuntimeException("Cannot change the selection-state of a placeholder seat");
-        }
-        selectionState = 1;
-    }
-     */
-
-    //unselect hinzufügen?
 
     public int getRow() {
         return row;

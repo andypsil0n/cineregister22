@@ -49,52 +49,12 @@ public class ShowTest {
         String dayTime = show.getDayTime();
         assertThat(dayTime).isEqualTo(time);
     }
-    
-    @Test
-    void show_bookSeats_booksAsManySeatsAsWanted() {
-        Show show = new Show(splittedShow);
-        int row = 4;
-        int number = 5;
-        double totalPrice = 0.00;
-
-        for (int numberOfSeats = 0; numberOfSeats < 2; numberOfSeats++) {
-            totalPrice += show.bookSeatAt(row, number);
-            number++;
-        }
-
-        Hall showHall = show.getHall();
-        Seat seat1 = showHall.getSeatAt(4, 5);
-        Seat seat2 = showHall.getSeatAt(4, 6);
-
-        String state1= seat1.getState();
-        String state2 = seat2.getState();
-
-        assertThat(state1).isEqualTo("booked");
-        assertThat(state2).isEqualTo("booked");
-        assertThat(totalPrice).isEqualTo(7.00*2);
-    }
 
     @Test
-    void seat_reserveSeat_reservesAsManySeatsAsWanted() {
+    void show_getHallName_returnsHallName() {
         Show show = new Show(splittedShow);
-        int row = 4;
-        int number = 5;
-        double totalPrice = 0.00;
+        String hallName = show.getHallName();
 
-        for (int numberOfSeats = 0; numberOfSeats < 2; numberOfSeats++) {
-            totalPrice += show.reserveSeatAt(row, number);
-            number++;
-        }
-
-        Hall showHall = show.getHall();
-        Seat seat1 = showHall.getSeatAt(4, 5);
-        Seat seat2 = showHall.getSeatAt(4, 6);
-
-        String state1= seat1.getState();
-        String state2 = seat2.getState();
-
-        assertThat(state1).isEqualTo("reserved");
-        assertThat(state2).isEqualTo("reserved");
-        assertThat(totalPrice).isEqualTo(7.00*2);
+        assertThat(hallName).isEqualTo("hall1");
     }
 }

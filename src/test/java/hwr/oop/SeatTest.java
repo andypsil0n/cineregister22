@@ -31,7 +31,7 @@ public class SeatTest {
     @Test
     void freeSeat_setStateToReserved_getStateReturnsReserved() {
         Seat seat = new Seat(row, number, price, state);
-        seat.setStateTo("reserved");
+        seat.setStateTo("R");
         String seatState = seat.getState();
         assertThat(seatState).isEqualTo("reserved");
     }
@@ -40,54 +40,34 @@ public class SeatTest {
     @Test
     void freeSeat_setStateToBooked_getStateReturnsBooked() {
         Seat seat = new Seat(row, number, price, state);
-        seat.setStateTo("booked");
+        seat.setStateTo("b");
         String seatState = seat.getState();
         assertThat(seatState).isEqualTo("booked");
     }
-
-    /*
-    @Test
-    void freeSeat_newFreeSeat_getSelectionStateReturnUnselected() {
-        Seat seat = new Seat(row, number, price, state);
-        String seatSelectionState = seat.getSelectionState();
-        assertThat(seatSelectionState).isEqualTo("unselected");
-    }
-     */
-
-    /*
-    @Test
-    void freeSeat_setToSelected_getSelectionStateReturnSelected() {
-        Seat seat = new Seat(row, number, price, state);
-        seat.setToSelected();
-        String seatSelectionState = seat.getSelectionState();
-        assertThat(seatSelectionState).isEqualTo("selected");
-    }
-     */
 
     @Test
     void placeholderSeat_setState_throwsException() throws Exception {
         Seat seat = new Seat(row, number, price, ' ');
 
         //when
-        Throwable thrown = catchThrowable(() -> seat.setStateTo("reserved"));
+        Throwable thrown = catchThrowable(() -> seat.setStateTo("r"));
 
         //then
         assertThat(thrown).hasMessageContaining("Cannot change the state of a placeholder seat");
 
     }
 
-    /*
     @Test
-    void placeholderSeat_setToSelected_throwsException() {
-        Seat seat = new Seat(row, number, price, ' ');
+    void Seat_setState_wrongStateThrowsException() throws Exception {
+        Seat seat = new Seat(row, number, price, 'x');
 
         //when
-        Throwable thrown = catchThrowable(() -> seat.setToSelected());
+        Throwable thrown = catchThrowable(() -> seat.setStateTo("l"));
 
         //then
-        assertThat(thrown).hasMessageContaining("Cannot change the selection-state of a placeholder seat");
+        assertThat(thrown).hasMessageContaining("This is a wrong input for a state");
+
     }
-     */
 
     @Test
     void seat_getRow_returnsRow() {

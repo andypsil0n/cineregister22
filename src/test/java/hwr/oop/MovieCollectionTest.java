@@ -37,4 +37,24 @@ public class MovieCollectionTest {
         assertThat(thrown).hasMessageContaining("Our cinema has no shows for this movie");
 
     }
+
+    @Test
+    void movieCollection_getMoviesAsString_returnsMoviesAsString() {
+        MovieCollection movies = new MovieCollection(fileName);
+        String moviesAsString = movies.getMoviesAsString();
+
+        String wantedMoviesAsString = "Doctor Strange\n" +
+                                      "Mo     Di     Mi     Do     Fr     Sa     So\n" +
+                                      "17:00  17:00  16:00  16:00  17:00  17:00  15:00\n" +
+                                      "20:00         19:00  19:00  20:00  20:00       \n" +
+                                      "              22:00         23:00              \n" +
+                                      "\n" +
+                                      "Winnie Pooh\n" +
+                                      "Mo     Di     Mi     Do     Fr     Sa     So\n" +
+                                      "17:00  17:00  14:00  14:00  17:00  14:00  15:00\n" +
+                                      "\n";
+
+        assertThat(moviesAsString).isEqualTo(wantedMoviesAsString);
+    }
+
 }
