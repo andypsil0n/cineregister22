@@ -38,7 +38,7 @@ public class ReceiptTest {
 
     @Test
     void receipt_get_totalSeatCosts_returns_totalPrice() {
-        Receipt receipt = new Receipt();
+        Receipt receipt = new Receipt(1);
         for (int seatCount = 0; seatCount < seats.size(); seatCount++) {
             receipt.addSeat(seats.get(seatCount));
         }
@@ -56,7 +56,7 @@ public class ReceiptTest {
 
     @Test
     void receipt_setMovieName_getMovieNameReturnsCorrectMovieName() {
-        Receipt receipt = new Receipt();
+        Receipt receipt = new Receipt(1);
         receipt.setMovieName("Dr. Strange");
         String name = receipt.getMovieName();
         assertThat(name).isEqualTo("Dr. Strange");
@@ -64,14 +64,14 @@ public class ReceiptTest {
 
     @Test
     void receipt_setShowDates_getShowDatesReturnsCorrectShowDates() {
-        Receipt receipt = new Receipt();
+        Receipt receipt = new Receipt(1);
         receipt.setShowDates("Mo/17:00");
         assertThat(receipt.getShowDates()).isEqualTo("Mo/17:00");
     }
 
     @Test
     void receipt_setHall_getHallReturnsCorrectHall() {
-        Receipt receipt = new Receipt();
+        Receipt receipt = new Receipt(1);
         receipt.setHall("hall1");
         assertThat(receipt.getHall()).isEqualTo("hall1");
     }
@@ -88,7 +88,7 @@ public class ReceiptTest {
 
     @Test
     void receipt_addClientName_getClientNameReturnsCorrectClientName() {
-        Receipt receipt = new Receipt();
+        Receipt receipt = new Receipt(1);
         receipt.addClientName("Pascal Stark");
         String clientName = receipt.getClientName();
         assertThat(clientName).isEqualTo("Pascal Stark");
@@ -96,7 +96,7 @@ public class ReceiptTest {
 
     @Test
     void receipt_getReceiptAsString_returnsReceiptAsStringWithBookedSeats() {
-        Receipt receipt = new Receipt();
+        Receipt receipt = new Receipt(1);
 
         receipt.setMovieName("Doctor Strange");
         receipt.setShowDates("Mo/17:00");
@@ -128,7 +128,7 @@ public class ReceiptTest {
                 "-------------------------------\n" +
                 "Käufer:  Bernd Baum\n";;
 
-        Receipt receipt = new Receipt();
+        Receipt receipt = new Receipt(1);
 
         receipt.setMovieName("Doctor Strange");
         receipt.setShowDates("Mo/17:00");
@@ -160,7 +160,7 @@ public class ReceiptTest {
                 "-------------------------------\n" +
                 "Käufer:  Bernd Baum\n";;
 
-        Receipt receipt = new Receipt();
+        Receipt receipt = new Receipt(1);
 
         receipt.setMovieName("Doctor Strange");
         receipt.setShowDates("Mo/17:00");
@@ -178,7 +178,7 @@ public class ReceiptTest {
 
     @Test
     void receipt_saveReceipt_savesReceiptToDownloadFolder() throws FileNotFoundException {
-        Receipt receipt = new Receipt();
+        Receipt receipt = new Receipt(0);
 
         receipt.setMovieName("Doctor Strange");
         receipt.setShowDates("Mo/17:00");
@@ -194,7 +194,7 @@ public class ReceiptTest {
 
         String home = System.getProperty("user.home");
 
-        File receiptFile = new File(home + "\\Downloads\\" + "Rechnung.txt");
+        File receiptFile = new File(home + "\\Downloads\\" + "Rechnung1.txt");
         Scanner scanner = new Scanner(receiptFile);
         String firstLine = scanner.nextLine();
 

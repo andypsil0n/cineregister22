@@ -1,7 +1,5 @@
 package hwr.oop;
 
-import java.util.Locale;
-
 public class Seat {
     private int row;
     private int number;

@@ -3,20 +3,29 @@ package hwr.oop;
 import java.util.*;
 
 public class Main {
-
+ private static Scanner inputScanner = new Scanner(System.in);
     static void main() {
         System.out.println("CineRegister22");
         System.out.println("-- starting --");
+        int run = 1;
+
+
         boolean moreMovies = true;
         while (moreMovies == true) {
-            buyTickets();
+            buyTickets(run);
             System.out.println();
             System.out.println();
             System.out.println();
 
+            System.out.println("Möchten Sie weitere Tickets bei uns buchen? (y/n)");
+            System.out.print("Antwort: ");
+            String moreMoviesAnswer = inputScanner.nextLine();
+            System.out.println();
+            moreMovies = checkIfMoreMoviesWanted(moreMoviesAnswer);
 
-            moreMovies = false;
+            run++;
         }
+        inputScanner.close();
     }
 
     public static boolean checkIfMoreMoviesWanted(String moreMoviesAnswer) {
@@ -29,11 +38,10 @@ public class Main {
         }
     }
 
-    private static void buyTickets() {
+    private static void buyTickets(int run) {
         //SetUp
         MovieCollection movieCollection = new MovieCollection("movielist.txt");
-        Receipt receipt = new Receipt();
-        Scanner inputScanner = new Scanner(System.in);
+        Receipt receipt = new Receipt(run);
         ArrayList<Seat> seats = new ArrayList<>();
 
         System.out.println();
@@ -54,7 +62,7 @@ public class Main {
         System.out.print("Gewünschter Film: ");
         String wantedMovie = inputScanner.nextLine();
         Movie movie = movieCollection.getMovie(wantedMovie);
-        receipt.setMovieName(wantedMovie);
+        receipt.setMovieName(movie.getName());
         System.out.println();
 
         //Eingabe Vorstellungstag:
@@ -174,6 +182,7 @@ public class Main {
         receipt.addClientName(clientName);
 
         //Abfragen der Bankverbindung bei Buchung:
+        //nur Dummy
         if (wantedState.toLowerCase().equals("b")) {
             System.out.println();
             System.out.println("Bitte geben Sie Ihre IBAN ein.");
@@ -212,8 +221,6 @@ public class Main {
         System.out.println("----LEINWAND----");
         System.out.println(hall.getHallAsString());
         receipt.saveReceipt();
-
-        inputScanner.close();
     }
 
     private static void printHall(Hall hall) {

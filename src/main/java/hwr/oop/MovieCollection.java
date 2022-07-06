@@ -1,7 +1,6 @@
 package hwr.oop;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class MovieCollection {
     private ArrayList<Movie> movies = new ArrayList<Movie>();

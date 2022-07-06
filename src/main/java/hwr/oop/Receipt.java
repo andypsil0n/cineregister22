@@ -7,11 +7,16 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Receipt {
+    private final int receiptNumber;
     private String movieName;
     private ArrayList<Seat> seats = new ArrayList<>();
     private String clientName;
     private String showDates;
     private String hall;
+
+    public Receipt(int run) {
+        this.receiptNumber = run;
+    }
 
     public void setMovieName(String movieName) {
         this.movieName = movieName;
@@ -119,8 +124,7 @@ public class Receipt {
 
     public void saveReceipt() {
         String home = System.getProperty("user.home");
-        File receipt = new File(home + "\\Downloads\\" + "Rechnung.txt");
-        Path p = Path.of(home + "\\Downloads\\" + "Rechnung.txt");
+        Path p = Path.of(home + "\\Downloads\\" + "Rechnung" + receiptNumber + ".txt");
         try {
             Path receiptPath = Files.writeString(p, getReceiptAsString());
         } catch (IOException e) {
