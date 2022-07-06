@@ -200,6 +200,7 @@ public class Main {
 
         System.out.println("Vielen Dank für Ihren Einkauf.\n" +
                 "Nachfolgend wird ihre Rechnung ausgegeben.\n" +
+                "Sie finden diese außerdem in ihrem Download-Ordner.\n" +
                 "Wir wünschen Ihnen viel Spaß bei der Vorstellung von " + movie.getName() + ".");
 
         System.out.println();
@@ -210,6 +211,8 @@ public class Main {
         System.out.println("Aktualisierter Saal: ");
         System.out.println("----LEINWAND----");
         System.out.println(hall.getHallAsString());
+        receipt.saveReceipt();
+
         inputScanner.close();
     }
 

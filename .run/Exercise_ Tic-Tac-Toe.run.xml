@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Exercise: Tic-Tac-Toe" type="JUnit" factoryName="JUnit">
-    <module name="hwr-oop-shared-remote-repo" />
+    <module name="project" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="hwr.oop.exercises.tictactoe.*" />

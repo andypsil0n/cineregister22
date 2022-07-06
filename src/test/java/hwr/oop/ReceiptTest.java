@@ -3,7 +3,10 @@ package hwr.oop;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -139,5 +142,62 @@ public class ReceiptTest {
         String receiptAsString = receipt.getReceiptAsString();
         assertThat(receiptAsString).isEqualTo(wantedReceiptAsString); // ändern
 
+    }
+
+    @Test
+    void receipt_getReceiptAsString_returnsReceiptAsStringWithStatusCantBeRead() {
+        String wantedReceiptAsString = "Rechnung\n" +
+                "\n" +
+                "Film:    Doctor Strange\n" +
+                "Zeit:    Mo/17:00\n" +
+                "Saal:    hall1\n" +
+                "-------------------------------\n" +
+                "Sitz 1:  Reihe 5 Platz 7, 7,00€\n" +
+                "Sitz 2:  Reihe 5 Platz 8, 7,00€\n" +
+                "\n" +
+                "Gesamt:                  14,00€\n" +
+                "Status:  konnte nicht ermittelt werden\n" +
+                "-------------------------------\n" +
+                "Käufer:  Bernd Baum\n";;
+
+        Receipt receipt = new Receipt();
+
+        receipt.setMovieName("Doctor Strange");
+        receipt.setShowDates("Mo/17:00");
+        receipt.setHall("hall1");
+
+        receipt.addSeat(new Seat(5, 7, 7.00, ' '));
+        receipt.addSeat(new Seat(5, 8, 7.00, ' '));
+
+        receipt.addClientName("Bernd Baum");
+
+        String receiptAsString = receipt.getReceiptAsString();
+        assertThat(receiptAsString).isEqualTo(wantedReceiptAsString); // ändern
+
+    }
+
+    @Test
+    void receipt_saveReceipt_savesReceiptToDownloadFolder() throws FileNotFoundException {
+        Receipt receipt = new Receipt();
+
+        receipt.setMovieName("Doctor Strange");
+        receipt.setShowDates("Mo/17:00");
+        receipt.setHall("hall1");
+
+        receipt.addSeat(seat1);
+        receipt.addSeat(seat2);
+
+        receipt.addClientName("Bernd Baum");
+
+        String receiptAsString = receipt.getReceiptAsString();
+        receipt.saveReceipt();
+
+        String home = System.getProperty("user.home");
+
+        File receiptFile = new File(home + "\\Downloads\\" + "Rechnung.txt");
+        Scanner scanner = new Scanner(receiptFile);
+        String firstLine = scanner.nextLine();
+
+        assertThat(firstLine).isEqualTo("Rechnung");
     }
 }

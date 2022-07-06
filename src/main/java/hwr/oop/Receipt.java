@@ -1,5 +1,9 @@
 package hwr.oop;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Receipt {
@@ -113,4 +117,15 @@ public class Receipt {
     }
 
 
+    public void saveReceipt() {
+        String home = System.getProperty("user.home");
+        File receipt = new File(home + "\\Downloads\\" + "Rechnung.txt");
+        Path p = Path.of(home + "\\Downloads\\" + "Rechnung.txt");
+        try {
+            Path receiptPath = Files.writeString(p, getReceiptAsString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
