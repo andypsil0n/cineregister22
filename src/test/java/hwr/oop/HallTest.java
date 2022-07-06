@@ -57,4 +57,40 @@ public class HallTest {
         assertThat(freeSeats).isEqualTo(86);
     }
 
+    @Test
+    void hall_checkIfCorrectRow_0ReturnsFalse() {
+        Hall hall = new Hall(hallName, price);
+        assertThat(hall.checkIfCorrectRow(0)).isFalse();
+    }
+
+    @Test
+    void hall_checkIfCorrectRow_7ReturnsFalse() {
+        Hall hall = new Hall(hallName, price);
+        assertThat(hall.checkIfCorrectRow(7)).isFalse();
+    }
+
+    @Test
+    void hall_checkIfCorrectRow_3ReturnsTrue() {
+        Hall hall = new Hall(hallName, price);
+        assertThat(hall.checkIfCorrectRow(3)).isTrue();
+    }
+
+
+    @Test
+    void hall_checkIfCorrectNumber_0ReturnsFalse() {
+        Hall hall = new Hall(hallName, price);
+        assertThat(hall.checkIfCorrectNumber(0)).isFalse();
+    }
+
+    @Test
+    void hall_checkIfCorrectNumber_16ReturnsFalse() {
+        Hall hall = new Hall(hallName, price);
+        assertThat(hall.checkIfCorrectNumber(16)).isFalse();
+    }
+
+    @Test
+    void hall_checkIfCorrectNumber_3ReturnsTrue() {
+        Hall hall = new Hall(hallName, price);
+        assertThat(hall.checkIfCorrectNumber(3)).isTrue();
+    }
 }

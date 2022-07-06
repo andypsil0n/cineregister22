@@ -47,6 +47,8 @@ public class Seat {
             state = 2;
         } else if(newState.equals("b")) {
             state = 3;
+        } else if (newState.equals("o")) {
+            state = 4;
         } else  {
             throw new RuntimeException("This is a wrong input for a state");
         }
@@ -77,8 +79,18 @@ public class Seat {
             stateChar = 'r';
         } else if (state == 3) {
             stateChar = '#';
+        } else if (state == 4) {
+            stateChar = 'o';
         }
 
         return stateChar;
+    }
+
+    public boolean checkIfSeatIsSelectable() {
+        if (state == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

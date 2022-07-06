@@ -76,4 +76,20 @@ public class Hall {
         }
         return freeSeats;
     }
+
+    public boolean checkIfCorrectRow(int wantedRow) {
+        if (wantedRow < 1 || wantedRow > maxRows) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean checkIfCorrectNumber(int wantedNumber) {
+        if (wantedNumber < 1 || wantedNumber > maxNumbers) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

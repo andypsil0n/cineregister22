@@ -29,6 +29,22 @@ public class SeatTest {
     }
 
     @Test
+    void Seat_checkIfSeatIsSelectable_freeSeatReturnsTrue() throws Exception {
+        Seat seat = new Seat(row, number, price, 'x');
+        boolean isSeatSelectable = seat.checkIfSeatIsSelectable();
+        assertThat(isSeatSelectable).isTrue();
+
+    }
+
+    @Test
+    void Seat_checkIfSeatIsSelectable_reservedSeatReturnsFalse() throws Exception {
+        Seat seat = new Seat(row, number, price, 'r');
+        boolean isSeatSelectable = seat.checkIfSeatIsSelectable();
+        assertThat(isSeatSelectable).isFalse();
+
+    }
+
+    @Test
     void freeSeat_setStateToReserved_getStateReturnsReserved() {
         Seat seat = new Seat(row, number, price, state);
         seat.setStateTo("R");
@@ -43,6 +59,14 @@ public class SeatTest {
         seat.setStateTo("b");
         String seatState = seat.getState();
         assertThat(seatState).isEqualTo("booked");
+    }
+
+    @Test
+    void freeSeat_setStateToSelected_getStateAsCharReturnsO() {
+        Seat seat = new Seat(row, number, price, state);
+        seat.setStateTo("o");
+        char seatState = seat.getStateAsChar();
+        assertThat(seatState).isEqualTo('o');
     }
 
     @Test

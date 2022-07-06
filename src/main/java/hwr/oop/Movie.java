@@ -83,6 +83,7 @@ public class Movie {
 
 
     public Show getShowAt(String dayString, String timeString) {
+        dayString = dayString.toLowerCase();
         checkIfCorrectDay(dayString);
 
         int day;
@@ -100,7 +101,7 @@ public class Movie {
 
     private void checkIfCorrectDay(String dayString) {
         boolean correctInput = false;
-        String[] correctDays = {"Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"};
+        String[] correctDays = {"mo", "di", "mi", "do", "fr", "sa", "so"};
         for (int i = 0; i < correctDays.length; i++) {
             if (correctDays[i].equals(dayString)) {
                 correctInput = true;
@@ -129,19 +130,19 @@ public class Movie {
 
     private int checkWhatDay(String dayString) {
         int day = 0;
-        if (dayString.equals("Mo")) {
+        if (dayString.equals("mo")) {
             day = 0;
-        } else if (dayString.equals("Di")) {
+        } else if (dayString.equals("di")) {
             day = 1;
-        } else if (dayString.equals("Mi")) {
+        } else if (dayString.equals("mi")) {
             day = 2;
-        } else if (dayString.equals("Do")) {
+        } else if (dayString.equals("do")) {
             day = 3;
-        } else if (dayString.equals("Fr")) {
+        } else if (dayString.equals("fr")) {
             day = 4;
-        } else if (dayString.equals("Sa")) {
+        } else if (dayString.equals("sa")) {
             day = 5;
-        } else if (dayString.equals("So")) {
+        } else if (dayString.equals("so")) {
             day = 6;
         }
         return day;

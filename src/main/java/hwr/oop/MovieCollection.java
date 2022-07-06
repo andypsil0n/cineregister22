@@ -1,6 +1,7 @@
 package hwr.oop;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MovieCollection {
     private ArrayList<Movie> movies = new ArrayList<Movie>();
@@ -21,7 +22,7 @@ public class MovieCollection {
         int wantedMovieNumber = 0;
         for (int movieNumber = 0; movieNumber < movies.size(); movieNumber++) {
             Movie movie = movies.get(movieNumber);
-            if (movie.getName().equals(movieName)) {
+            if (movie.getName().toLowerCase().equals(movieName.toLowerCase())) {
                 correctMovie = true;
                 wantedMovieNumber = movieNumber;
             }

@@ -14,18 +14,6 @@ public class Main {
             System.out.println();
             System.out.println();
 
-            /*
-            Scanner continueScanner = new Scanner(System.in);
-            System.out.println("Möchten Sie Tickets für eine weitere Vorstellung kaufen? (y/n)");
-            System.out.print("Antwort: ");
-            String moreMoviesAnswer = continueScanner.next();
-            System.out.println();
-
-            moreMoviesAnswer = moreMoviesAnswer.toLowerCase();
-            moreMovies = checkIfMoreMoviesWanted(moreMoviesAnswer);
-
-            continueScanner.close();
-            */
 
             moreMovies = false;
         }
@@ -70,7 +58,7 @@ public class Main {
         System.out.println();
 
         //Eingabe Vorstellungstag:
-        System.out.println("Sie haben den Film \"" + wantedMovie + "\" ausgewählt.");
+        System.out.println("Sie haben den Film \"" + movie.getName() + "\" ausgewählt.");
         System.out.println("Bitte geben sie Ihren gewünschten Tag (Abkürzung) ein.");
         System.out.print("Gewünschter Tag: ");
         String wantedDay = inputScanner.nextLine();
@@ -97,37 +85,71 @@ public class Main {
 
         int freeSeats = hall.countFreeSeats();
 
-        //Auswahl der Sitzplätze:
-        System.out.println("Wie viele Sitzplätze möchten Sie reservieren oder buchen?");
-        System.out.println("(Verfügbar: " + freeSeats +")");
-        System.out.print("Anzahl Sitzplätze: ");
-        int numberOfSeats = inputScanner.nextInt();
-        System.out.println();
+        //Auswahl der Anzahl der Sitzplätze:
+        boolean correctNumberOfSeats = false;
+        int numberOfSeats = 1;
+        while (correctNumberOfSeats == false) {
+            System.out.println("Wie viele Sitzplätze möchten Sie reservieren oder buchen?");
+            System.out.println("(Verfügbar: " + freeSeats + ")");
+            System.out.print("Anzahl Sitzplätze: ");
+            numberOfSeats = inputScanner.nextInt();
+            System.out.println();
 
-        if (numberOfSeats > freeSeats) {
-            throw new RuntimeException("There are not enough free seats");
+            if (numberOfSeats > freeSeats) {
+                System.out.println("!!! Sie können nicht mehr Sitze auswählen, als verfügbar sind.");
+                System.out.println();
+            } else if (numberOfSeats == 0) {
+                System.out.println("!!! Sie müssen mindestens einen Sitzplatz auswählen");
+                System.out.println();
+            } else {
+                correctNumberOfSeats = true;
+            }
         }
 
-        for (int seatCount = 0; seatCount < numberOfSeats; seatCount++) {
-            System.out.println("Bitte geben Sie Ihre gewünschte Reihe für den " + (seatCount+1) + ". Sitzplatz ein.");
-            System.out.println("(von oben nach unten, 0-5)");
-            System.out.print("Gewünschte Reihe: ");
-            int wantedRow = inputScanner.nextInt();
-            System.out.println();
+        System.out.println("------------------------------------------------");
+        printHall(hall);
 
-            System.out.println("Bitte geben Sie Ihre gewünschte Nummer für den " + (seatCount+1) + ". Sitzplatz ein.");
-            System.out.println("(von links nach rechts, 0-14)");
-            System.out.print("Gewünschter Platz: ");
-            int wantedNumber = inputScanner.nextInt();
-            System.out.println();
-            if (hall.getSeatAt(wantedRow, wantedNumber).getStateAsChar() != ' ') {
-                seats.add(hall.getSeatAt(wantedRow, wantedNumber));
-                receipt.addSeat(hall.getSeatAt(wantedRow, wantedNumber));
+        //Auswahl der Sitzplätze
+        for (int seatCount = 0; seatCount < numberOfSeats; seatCount++) {
+
+            boolean correctRows = false;
+            int wantedRow = 0;
+            while (!hall.checkIfCorrectRow(wantedRow)) {
+                System.out.println("Bitte geben Sie Ihre gewünschte Reihe für den " + (seatCount + 1) + ". Sitzplatz ein.");
+                System.out.println("(von oben nach unten, 1-6)");
+                System.out.print("Gewünschte Reihe: ");
+
+                wantedRow = inputScanner.nextInt();
+                System.out.println();
+            }
+            wantedRow -= 1;
+
+            int wantedNumber = 0;
+            while (!hall.checkIfCorrectNumber(wantedNumber)) {
+                System.out.println("Bitte geben Sie Ihre gewünschte Nummer für den " + (seatCount + 1) + ". Sitzplatz ein.");
+                System.out.println("(von links nach rechts, 1-15)");
+                System.out.print("Gewünschter Platz: ");
+                wantedNumber = inputScanner.nextInt();
+                System.out.println();
+            }
+            wantedNumber -= 1;
+
+            if (hall.getSeatAt(wantedRow, wantedNumber).checkIfSeatIsSelectable() == true) {
+                Seat seat = hall.getSeatAt(wantedRow, wantedNumber);
+                seats.add(seat);
+                receipt.addSeat(seat);
+                seat.setStateTo("o");
+                System.out.println("------------------------------------------------");
+                printHall(hall);
             }
             else {
-                System.out.println("Dieser Sitz kann nicht ausgewählt werden. Bitte wählen Sie einen anderen Sitz");
+                System.out.println("------------------------------------------------");
+                printHall(hall);
+                System.out.println("!!! Dieser Sitz kann nicht ausgewählt werden.\n" +
+                        "Bitte wählen Sie einen anderen Sitzplatz.");
                 seatCount--;
             }
+
 
         }
 
@@ -178,7 +200,7 @@ public class Main {
 
         System.out.println("Vielen Dank für Ihren Einkauf.\n" +
                 "Nachfolgend wird ihre Rechnung ausgegeben.\n" +
-                "Wir wünschen Ihnen viel Spaß bei der Vorstellung von " + wantedMovie + ".");
+                "Wir wünschen Ihnen viel Spaß bei der Vorstellung von " + movie.getName() + ".");
 
         System.out.println();
         System.out.println();
@@ -189,6 +211,13 @@ public class Main {
         System.out.println("----LEINWAND----");
         System.out.println(hall.getHallAsString());
         inputScanner.close();
+    }
+
+    private static void printHall(Hall hall) {
+        System.out.println();
+        System.out.println("----LEINWAND----");
+        System.out.println(hall.getHallAsString());
+        System.out.println();
     }
 
 }

@@ -1,5 +1,7 @@
 package hwr.oop;
 
+import java.util.Locale;
+
 public class Show {
     private String day;
     private String time;
