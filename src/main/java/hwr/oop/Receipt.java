@@ -22,32 +22,20 @@ public class Receipt {
         this.movieName = movieName;
     }
 
-    public String getMovieName() {
-        return movieName;
-    }
-
     public void setShowDates(String showDates) {
         this.showDates = showDates;
     }
 
-    public String getShowDates() {
-        return showDates;
-    }
 
     public void setHall(String hall) {
         this.hall = hall;
     }
 
-    public String getHall() {
-        return hall;
-    }
-
-
     public void addSeat(Seat seat) {
         seats.add(seat);
     }
 
-    public double getTotalCosts() {
+    private double getTotalCosts() {
         double totalCosts = 0;
 
         for (int seatCount = 0; seatCount < seats.size(); seatCount++) {
@@ -61,10 +49,6 @@ public class Receipt {
         this.clientName= clientName;
     }
 
-    public String getClientName() {
-        return clientName;
-    }
-
     public String getReceiptAsString() {
         String titleLine = "Rechnung\n";
         String freeLine = "\n";
@@ -76,7 +60,7 @@ public class Receipt {
         String seperatorLine = "-------------------------------\n";
         
         String seatsAsString = "";
-        seatsAsString = getSeatsAsStrin();
+        seatsAsString = getSeatsAsString();
         
         String completePriceLine = "Gesamt:                  " + getPriceAString(getTotalCosts()) + "\n";
         
@@ -100,7 +84,7 @@ public class Receipt {
         return receiptAsString;
     }
 
-    private String getSeatsAsStrin() {
+    private String getSeatsAsString() {
         String seatsAsString = "";
 
         for (int seatCount = 0; seatCount < seats.size(); seatCount++) {

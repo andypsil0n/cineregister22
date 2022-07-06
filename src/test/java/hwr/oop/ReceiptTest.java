@@ -37,64 +37,6 @@ public class ReceiptTest {
     }
 
     @Test
-    void receipt_get_totalSeatCosts_returns_totalPrice() {
-        Receipt receipt = new Receipt(1);
-        for (int seatCount = 0; seatCount < seats.size(); seatCount++) {
-            receipt.addSeat(seats.get(seatCount));
-        }
-        double totalCosts = receipt.getTotalCosts();
-
-        assertThat(totalCosts).isEqualTo(14.00);
-    }
-
-    /*
-    @Test // Eingaben die beim bezahlen gemacht werden auch überprüfen?
-    void receipt_getCreditCardNumber_length_returns16digits() {
-        String creditCard_Number ="4356353291238672";
-        assertThat(creditCard_Number.length()).isEqualTo(16);
-    } */
-
-    @Test
-    void receipt_setMovieName_getMovieNameReturnsCorrectMovieName() {
-        Receipt receipt = new Receipt(1);
-        receipt.setMovieName("Dr. Strange");
-        String name = receipt.getMovieName();
-        assertThat(name).isEqualTo("Dr. Strange");
-    }
-
-    @Test
-    void receipt_setShowDates_getShowDatesReturnsCorrectShowDates() {
-        Receipt receipt = new Receipt(1);
-        receipt.setShowDates("Mo/17:00");
-        assertThat(receipt.getShowDates()).isEqualTo("Mo/17:00");
-    }
-
-    @Test
-    void receipt_setHall_getHallReturnsCorrectHall() {
-        Receipt receipt = new Receipt(1);
-        receipt.setHall("hall1");
-        assertThat(receipt.getHall()).isEqualTo("hall1");
-    }
-
-    /*
-    @Test
-    void receipt_addSeatInformation_addsSeatInformationToReceipt() {
-        Receipt receipt = new Receipt();
-        receipt.addSeatInformation(1,1,7.00,'#');
-        Seat seat = receipt.getSeatInformation();
-        assertThat(seat).isEqualTo(new Seat(1,1,7.00,'#'));
-        // vllt als String und nicht als seat?
-    } */
-
-    @Test
-    void receipt_addClientName_getClientNameReturnsCorrectClientName() {
-        Receipt receipt = new Receipt(1);
-        receipt.addClientName("Pascal Stark");
-        String clientName = receipt.getClientName();
-        assertThat(clientName).isEqualTo("Pascal Stark");
-    }
-
-    @Test
     void receipt_getReceiptAsString_returnsReceiptAsStringWithBookedSeats() {
         Receipt receipt = new Receipt(1);
 
@@ -189,12 +131,11 @@ public class ReceiptTest {
 
         receipt.addClientName("Bernd Baum");
 
-        String receiptAsString = receipt.getReceiptAsString();
         receipt.saveReceipt();
 
         String home = System.getProperty("user.home");
 
-        File receiptFile = new File(home + "\\Downloads\\" + "Rechnung1.txt");
+        File receiptFile = new File(home + "\\Downloads\\" + "Rechnung0.txt");
         Scanner scanner = new Scanner(receiptFile);
         String firstLine = scanner.nextLine();
 
