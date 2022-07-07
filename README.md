@@ -63,6 +63,9 @@ into a printable table (string) with empty slots.
 
 You can start CineRegister22 by starting the manual test in "MainTest". The started Programm will guide you.
 
+> :warning: Only edit halls by using a text editor! IDEs could delete needed spaces.
+
+
 > :note: You need to activate inputs to the test console.
  
 1. In IntelliJ: Help > Edit Custom VM Options
