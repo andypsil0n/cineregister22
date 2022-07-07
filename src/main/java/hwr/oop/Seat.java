@@ -7,8 +7,8 @@ public class Seat {
     private int state;
 
     public Seat(int row, int number, double price, char stateChar) {
-        this.row = row;
-        this.number = number;
+        this.row = row-1;
+        this.number = number-1;
         this.price = price;
         convertStateToInt(stateChar);
     }
@@ -54,11 +54,11 @@ public class Seat {
     }
 
     public int getRow() {
-        return row;
+        return row+1;
     }
 
     public int getNumber() {
-        return number;
+        return number+1;
     }
 
     public double getPrice() {

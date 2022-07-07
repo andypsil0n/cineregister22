@@ -132,7 +132,6 @@ public class Main {
                 wantedRow = inputScanner.nextInt();
                 System.out.println();
             }
-            wantedRow -= 1;
 
             int wantedNumber = 0;
             while (!hall.checkIfCorrectNumber(wantedNumber)) {
@@ -142,7 +141,6 @@ public class Main {
                 wantedNumber = inputScanner.nextInt();
                 System.out.println();
             }
-            wantedNumber -= 1;
 
             if (hall.getSeatAt(wantedRow, wantedNumber).checkIfSeatIsSelectable() == true) {
                 Seat seat = hall.getSeatAt(wantedRow, wantedNumber);
