@@ -3,10 +3,13 @@ package hwr.oop;
 import java.util.*;
 
 public class Main {
- private static Scanner inputScanner = new Scanner(System.in);
+    private static Scanner inputScanner = new Scanner(System.in);
+    private static MovieCollection movieCollection;
+
     static void main() {
         System.out.println("CineRegister22");
         System.out.println("-- starting --");
+        movieCollection = new MovieCollection("movielist.txt");
         int run = 1;
 
 
@@ -40,7 +43,6 @@ public class Main {
 
     private static void buyTickets(int run) {
         //SetUp
-        MovieCollection movieCollection = new MovieCollection("movielist.txt");
         Receipt receipt = new Receipt(run);
         ArrayList<Seat> seats = new ArrayList<>();
 
