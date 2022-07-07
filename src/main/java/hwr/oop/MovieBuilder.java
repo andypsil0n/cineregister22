@@ -35,6 +35,7 @@ public class MovieBuilder {
 
             movies.add(new Movie(name, times));
         }
+        movieScanner.close();
     }
 
     private int getNumberOfMovies() throws FileNotFoundException {

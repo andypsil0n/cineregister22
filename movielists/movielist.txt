@@ -1,4 +1,6 @@
 Doctor Strange
-Mo/17:00/hall1/7.00,Mo/20:00/hall1/8.00,Di/17:00/hall1/7.50,Mi/16:00/hall1/7.00,Mi/19:00/hall1/7.00,Mi/22:00/hall1/7.00,Do/16:00/hall1/7.00,Do/19:00/hall1/7.00,Fr/17:00/hall1/7.00,Fr/20:00/hall1/7.00,Fr/23:00/hall1/7.00,Sa/17:00/hall1/7.00,Sa/20:00/hall1/7.00,So/15:00/hall1/7.00
+Mo/17:00/hall1/7.50,Mo/20:00/hall4/8.00,Di/17:00/hall1/7.50,Mi/16:00/hall1/7.00,Mi/19:00/hall3/7.00,Mi/22:00/hall1/7.50,Do/16:00/hall1/7.00,Do/19:00/hall1/7.00,Fr/17:00/hall1/7.00,Fr/20:00/hall1/7.00,Fr/23:00/hall1/7.00,Sa/17:00/hall2/7.00,Sa/20:00/hall1/7.00,So/15:00/hall1/7.00
 Winnie Pooh
-Mo/17:00/hall1/7.00,Di/17:00/hall1/8.00,Mi/14:00/hall1/7.50,Do/14:00/hall1/7.00,Fr/17:00/hall1/7.00,Sa/14:00/hall1/7.00,So/15:00/hall1/7.00
+Mo/17:00/hall2/7.00,Di/17:00/hall3/8.00,Mi/14:00/hall1/7.50,Do/14:00/hall1/7.00,Fr/17:00/hall4/7.00,Sa/14:00/hall1/7.00,So/15:00/hall3/7.00,So/20:00/hall1/7.50
+Minions
+Mo/12:00/hall1/9.00,Di/14:00/hall2/8.00,Di/16:00/hall2/8.00,Mi/19:00/hall1/7.50,Mi/23:00/hall4/7.50,Do/14:00/hall2/7.50,Do/18:00/hall3/7.00,Fr/19:00/hall2/7.00,Sa/13:30/hall2/7.00,So/15:00/hall2/8.00,So/16:30/hall4/8.00
